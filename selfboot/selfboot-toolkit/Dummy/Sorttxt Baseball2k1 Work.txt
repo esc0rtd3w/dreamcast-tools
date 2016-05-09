@@ -1,0 +1,6 @@
+data/0.0 6
+data/1st_read.bin 5
+data/0gdtex.pvr 4
+data/Finala.sfd 3
+data/Voice.afs 2
+data/Mlb2000.afs 1

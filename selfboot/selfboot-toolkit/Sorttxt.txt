@@ -1,0 +1,2 @@
+data/0.0 8000
+data/0gdtex.pvr 7999

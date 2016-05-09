@@ -1,0 +1,52 @@
+[Header]
+Signature=VISE
+Version=0001
+RemoveInUseFiles=0
+RegistryKeyName=Dreamcast selfboot kit
+Product Name=Dreamcast selfboot kit
+[WinNT]
+AdminPrivileges=1
+[Directories2]
+0=c:\dc
+count=9
+1=C:\ProgramData
+2=C:\ProgramData\Microsoft
+3=C:\ProgramData\Microsoft\Windows
+4=C:\ProgramData\Microsoft\Windows\Start Menu
+5=C:\ProgramData\Microsoft\Windows\Start Menu\Programs
+6=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit
+7=c:\dc\images
+8=c:\dc\sb
+[Files]
+count=17
+0=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\AutoDummy.lnk
+1=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\Bin.lnk
+2=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\cdrwin.lnk
+3=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\Cue.lnk
+4=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\HOW TO.lnk
+5=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\Iso.lnk
+6=c:\dc\AutoDummy.exe
+7=c:\dc\bin2boot.exe
+8=c:\dc\cdrwin.cnt
+9=c:\dc\cdrwin.dat
+10=c:\dc\cdrwin.exe
+11=c:\dc\cdrwin.hlp
+12=c:\dc\HOW TO .txt
+13=c:\dc\Bin.bat
+14=c:\dc\Cue.bat
+15=c:\dc\Iso.bat
+16=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dreamcast selfboot kit\Remove Dreamcast selfboot kit.lnk
+[Strings]
+IDS_STRING1=Are you sure you want to completely remove the selected application and all of its components?
+IDS_STRING2=Confirm File Deletion
+IDS_STRING3=The system indicates that the following shared file is no longer used by any programs.
+IDS_STRING4=Remove Shared File?
+IDS_STRING5=Uninstall successfully completed.
+IDS_STRING6=Uninstall
+IDS_STRING7=If any programs are still using this file and it is removed, those programs may not function. Are you sure you want to remove the shared file?
+IDS_STRING8=Uninstall was partially successful.
+IDS_ADMINPRIVILEGESNEEDED=Administrative privileges are needed to uninstall this software.
+IDS_YES=&Yes
+IDS_NO=&No
+IDS_YESTOALL=Yes to &All
+IDS_REMOVINGFILE=Removing File:

@@ -1,0 +1,121 @@
+Global File$
+Dim Params$
+Params$ = Command$
+
+Params$ = Ltrim$(Params$)
+Params$ = Rtrim$(Params$)
+
+If Params$ <> "" Then
+
+If Right$(Params$, 3) <> "bin" or "BIN" Then
+Print "IpPatch 1.2 011202 burnerO"
+Print ""
+Print "Syntax: ippatch file.mr ip.bin"
+End
+End If
+
+Dim Counter
+Counter = 0
+
+While Mid$(Params$,Counter,1) <> " "
+Counter = Counter + 1
+Wend
+
+Dim Arg1$
+Dim Arg2$
+
+Arg1$ = Left$(Params$, Counter-1)
+Arg2$ = Mid$(Params$, Counter+1, Len(Params$)-Counter)
+
+If Exist(Arg1$) = 0 Then End
+If Exist(Arg2$) = 0 Then End
+
+Dim Fsize
+Fsize = Lof(Arg1$)
+Dim Mr$ * Fsize
+
+Open Arg1$ For Binary As Fp1
+Get$ Fp1,Fsize,Mr$ 
+Close Fp1
+
+Dim Clear$ * 8192
+Clear$ = Repeat$(8192,Chr$(0))
+
+Open Arg2$ For Binary As Fp2
+
+Seek Fp2,14368
+Put$ Fp2,Clear$,8192
+Seek Fp2,14368
+Put$ Fp2,Mr$,Fsize
+Close Fp2
+
+Print Ucase$(Left$(Arg2$,1)), Right$(Arg2$,Len(Arg2$)-1), " Successfully Patched."
+
+End
+End If
+
+Print "IpPatch 1.2 011202 burnerO"
+Print ""
+Print "Can also be ran from the command line."
+Print "Syntax: ippatch file.mr ip.bin"
+
+OpenFileDialog(0,"Select mr image","*.mr","","Mr Images","*.mr",0)
+If File$ = "*.mr" Then End
+
+Dim Fsize
+Fsize = Lof(File$)
+Dim Mr$ * Fsize
+
+Open File$ For Binary As Fp1
+Get$ Fp1,Fsize,Mr$ 
+Close Fp1
+
+OpenFileDialog(0,"Select ip.bin","*.bin","","Bin Files","*.bin",0)
+If File$ = "*.bin" Then End
+
+Dim Clear$ * 8192
+Clear$ = Repeat$(8192,Chr$(0))
+
+Open File$ For Binary As Fp2
+
+Seek Fp2,14368
+Put$ Fp2,Clear$,8192
+Seek Fp2,14368
+Put$ Fp2,Mr$,Fsize
+Close Fp2
+
+Dim MyMsg$
+MyMsg$ = "Bin successfully patched" & CrLf$ & _
+"---------------------------------------" & CrLf$ & _
+" Another semi-useful tool" & CrLf$ & _
+" from your friend burnerO" & CrLf$ & ""
+MessageBox(NULL, MyMsg, "Successful :]", MB_OK)
+
+FUNCTION OpenFileDialog( hWnd AS HWND, _
+zCaption$, zFilespec$, zInitialDir$, zFilter$, zDefExtension$, Flags )
+
+LOCAL ofn AS OPENFILENAME
+LOCAL FileTitle$
+LOCAL Filter$
+LOCAL InitialDir$
+LOCAL Title$
+LOCAL DefExt$
+LOCAL RetFlg
+
+Filter$ = zFilter$
+InitialDir$ = zInitialDir$
+File$ = zFilespec$
+DefExt$ = zDefExtension$
+Title$ = zCaption$
+
+ofn.lStructSize       = SIZEOF(ofn)
+ofn.hwndOwner         = hWnd
+ofn.lpstrFilter       = Filter$
+ofn.lpstrFile         = File$
+ofn.nMaxFile          = SIZEOF(File$)
+ofn.lpstrInitialDir   = InitialDir$
+ofn.Flags             = Flags
+ofn.lpstrDefExt       = DefExt$
+ofn.lpstrTitle        = Title$
+GetOpenFileName(&ofn)
+End Function

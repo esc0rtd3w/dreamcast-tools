@@ -1,0 +1,68 @@
+
+    __|_____ _________________________________________________________|__
+      |                                                              .|
+      :          _ ___ _________      -  E  C  H  E  L  O  N  -    .::|
+ ___ ________  _______ __      /  ___ ________________  _________   _________
+    _____    \/     _/  /    _/___   _____    \      /_/    _    \__\  _     \
+  _/    /   _/      |  /          \_/    /   //     / _____ /    /     /    //
+ //    ____//       |_//    /     //    _____/    _/_/    //    /     /     /
+ \_________\_________/_____/_____/\_________/\____\______/_____/_____/_____/
+                                                             -rtx/art
+    __|_________________________________________________________ _____|__
+      |                                                               |
+      `- Proudly Presents:
+
+      Game.....: Dreamcast Self-Booting Tutorial (C) Echelon
+
+      Origin...: USA - NTSC           -  Filename.....: E-SELFBT.ZIP
+      Released.: September 19th, 2000 -  Format.......: Toolset
+      Platform.: Sega Dreamcast (DC)  -  CD(s)........: You Choose
+
+    - --- Release Notes ------------------------------------------------> 
+         
+    Here's something that you have almost all been waiting for, the
+    ability to make your own games self-boot. Please note that this
+    tutorial is meant for somewhat experienced users, and it is not
+    a simple click and play program. Doing a simple program where you
+    just click buttons is very hard to do for self-booting disks as 
+    they all differ so much. This tutorial will work and has been
+    tested to work with WinCE & CDDA games. It also explains in depth
+    how to go about booting both of the above. Follow the instructions
+    in TUTORIAL.TXT in this archive for more info on using this.
+
+    Please take prior notice that this WILL NOT work with all burners,
+    and it is not meant to. If cdrecord fails on you, do NOT bitch 
+    at us, we did NOT write that program. Thank you.
+
+    - --- Group News --------------------------------------------------->
+
+    15 Releases and still going strong. We're here to stay folks.
+    
+    - --- Releases ----------------------------------------------------->
+
+    Num  Game Title & Publisher                    Origin      Date
+    ---  ----------------------                    ------      ----
+    001  Flag To Flag CART Racing (C) Sega Sports  USA/NTSC    09/04/00
+    002  Deep Fighter (C) Ubisoft / Criterion      USA/NTSC    09/05/00
+    003  Grand Theft Auto 2 (C) Take 2 / Rockstar  USA/NTSC    09/05/00
+    004  Capcom VS. SNK - M.F. 2000 (C) Capcom     JPN/NTSC    09/05/00     
+    005  Dino Crisis (C) Capcom                    JPN/NTSC    09/06/00
+    006  Vampire Chronicles For M.S. (C) Capcom    JPN/NTSC    09/06/00
+    007  Carrier (C) Jaleco                        USA/NTSC    09/08/00
+    008  Blue Stinger (C) Activision / Climax      USA/NTSC    09/10/00
+    009  Vigilante 8 Second Offense (C) Activision EURO/P-N    09/11/00
+    010  Marvel VS. Capcom: CoSH (C) Capcom        USA/NTSC    09/11/00
+    011  Plasma Sword (C) Capcom                   USA/NTSC    09/13/00
+    012  Mortal Kombat Gold With CDDA (C) Midway   USA/NTSC    09/14/00
+    013  NFL Blitz 2001 (C) Midway                 USA/NTSC    09/16/00
+    014  Dance Dance Rev.: Club Mix (C) Konami     JPN/NTSC    09/18/00
+    015  ESPN Internat. Track & Field (C) Konami   EURO/P-N    09/18/00
+    ---  DC Self Booting Tutorial (C) Echelon      ALL/ALL     09/19/00
+  
+    - --- Greetings ---------------------------------------------------->
+
+    KALISTO, FAIRLIGHT, CLASS, DEVIANCE, MYTH, PARADOX, CCS, ACCESSION, 
+    STATIC, MENACE, EURASIA, CAPITAL, LIGHTFORCE, AGGRESSION, UTOPIA,
+    NBC & RAZOR 1911.
+
+    - ----------------[ Echelon Dreamcast 2000 - You Will Believe! ]---->

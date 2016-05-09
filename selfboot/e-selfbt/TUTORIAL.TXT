@@ -1,0 +1,445 @@
+
+    __|_____ _________________________________________________________|__
+      |                                                              .|
+      :          _ ___ _________      -  E  C  H  E  L  O  N  -    .::|
+ ___ ________  _______ __      /  ___ ________________  _________   _________
+    _____    \/     _/  /    _/___   _____    \      /_/    _    \__\  _     \
+  _/    /   _/      |  /          \_/    /   //     / _____ /    /     /    //
+ //    ____//       |_//    /     //    _____/    _/_/    //    /     /     /
+ \_________\_________/_____/_____/\_________/\____\______/_____/_____/_____/
+                                                             -rtx/art
+    __|_________________________________________________________ _____|__
+
+Dreamcast Self-Boot Tutorial - (C) Echelon 2000!
+------------------------------------------------
+
+Introduction:
+-------------
+
+Since we find it a bit stupid to re-release nearly 200 DC titles over again,
+and waste the bandwidth of FTP's and end-users, We thought we would release 
+a tutorial & toolset with which you can convert all of your old Utopia loader
+games to the newer self-boot format. 
+
+Limitations:
+------------
+
+Self-Boot and Multisession code requires 3 Minutes of Overhead on the CD
+you are burning. So, if you are burning to an 80 Minute CD, Your data
+must be approximately 77 Minutes, If you are burning to a 74 Minute CD,
+Your data must be approximately 71 Minutes. If the data is over this
+size, Your burn will fail. Many end-users claimed they could easily rip 
+games and downsize them, but didn't know to read in GD-ROMs. So here is
+your chance to prove your theories, Go ahead and rip down the games you
+are trying to burn by 3 Minutes if they are Full CDs.
+
+Tutorial for games without CDDA:
+--------------------------------
+
+1) Make a directory on your hard-disk called "selfboot"
+
+2) UnZIP this whole file (E-SELFBT.ZIP) to the directory.
+
+3) Download Win32 Binaries for CDRECORD & MKISOFS from:
+
+   ftp.fokus.gmd.de/pub/unix/cdrecord/alpha/win32/cdrtools-1.9a03-win32-bin.zip
+
+4) Unzip the file (cdrtools-1.9a03-win32-bin.zip) to the directory you made
+   on your hard disk earlier called "selfboot".
+
+5) Insert the Utopia Boot-CD version of the game into your CD-ROM drive,
+   Copy over the IP.BIN and 1ST_READ.BIN from the CD over to the "selfboot"
+   directory on your hard disk.
+
+   (Note 1: IP.BIN cannot be found on Accession releases, therefore Accession
+    releases cannot be made self-boot from this method.)
+
+   (Note 2: 1ST_READ.BIN might not be the exact name of the boot filename, If
+    you want to check what the boot filename really is on some games, open up
+    IP.BIN in a hex or text editor. Look on the top, It should say something
+    similar to: "V.001XXXXXXXX BLAH.BIN". If it says this, That means that
+    BLAH.BIN is the boot-filename, and this is the file that you should copy
+    over. If the game is using WinCE this filename will be 0WINCEOS.BIN.
+    This file will be referred to as BOOT.BIN from here-on. Please make sure
+    you don't think that BOOT.BIN is an actual file, It is just a alias as
+    this file can be named many things.)
+
+6) OK, So now in your "selfboot" directory, you should have this tutorial
+   unzipped, cdrecord and all related cdrecord tools, and you should also
+   have copied over the IP.BIN and BOOT.BIN from the game that you
+   are working on.
+
+7) Make a subdirectory called "data" inside your "selfboot" directory
+   and copy ALL game data files from the Utopia-BootCD game into this
+   directory. Also, delete the file IP.BIN from the "data" directory if
+   you already have it in the root of your "selfboot" tree. Also delete
+   the BOOT.BIN (generally 1ST_READ.BIN) from your data tree if
+   you have already put this file in the root of your "selfboot" tree.
+
+   (Note: All files that you copy from a CD will have Read-Only attributes,
+    You must take these off before continuing.)
+
+8) Now, you have 2 ways of achieving the same thing for this step, I will
+   go over both ways and you can choose whichever you want. To start off
+   for both methods, insert a blank disk into your CD-Recorder.
+
+   1) CDRWIN Method:
+      
+      a) Fire up CDRWIN.
+         Goto the first icon on the top left: "Record Disc"
+      b) Click the icon in the top right corner: "Load tracks"
+      c) Click add, then choose the file AUDIO.RAW in your "selfboot"
+         dir. This file was included in the E-SELFBT.ZIP archive.
+      d) Click the tab "Open New Session" near the bottom.
+      e) Burn this CD.
+
+   2) CDRECORD Method:
+ 
+      a) If your CD-Recorder cannot use the "Open New Session" option
+         in CDRWIN, You have one more way to do it, that may or may not
+         work.
+      b) In the "selfboot" directory you should have the cdrecord toolset
+         unzipped. You should see files such as cdrecord.exe, mkisofs.exe,
+         and cygwin1.dll.
+      c) Run the following command from a DOS Prompt:
+         cdrecord -scanbus
+      d) This should show you a list of CD-ROM and CD-Recorder units installed
+         in your system. Look for your CD-Recorder and find the SCSI Bus ID#.
+         It will be in format x,x,x. It will also be referred to as x,x,x for
+         the rest of this tutorial.
+      e) In your "selfboot" directory, run the following command to record
+         the 1st session of the disk:
+         
+         cdrecord -dev=x,x,x -multi -audio audio.raw
+         
+         You can optionally include "speed=x" after -audio, Where x is the
+         maximum speed that your CD-Recorder can record at.
+
+9) OK, Now that you have the first session burned, it's time to move onto
+   the second. This is the crucial part so make sure you pay attention and
+   follow things closely. You should already have all game data files in the
+   subdirectory "data", except for BOOT.BIN and IP.BIN.
+
+10) Read over the CDRECORD burn instructions. Find out the SCSI Bus ID# of
+    your CD-Recorder If you have not done so already. Run the following 
+    command:
+   
+    cdrecord -dev=x,x,x -msinfo
+
+    It will spit out a number in the form x,y. Normal values are 0,11700 or
+    0,11702 for a CD which only has AUDIO.RAW burned on the 1st session.
+
+11) Run a DOS Prompt and goto your "selfboot" directory, You should have
+    an executable there called "BINHACK.EXE". In addition you should have
+    the BOOT.BIN (generally called 1ST_READ.BIN) and IP.BIN in this 
+    directory.
+
+    Run the program BINHACK.EXE. When it prompts you for the Binary
+    file to modify, Pick the BOOT.BIN. If it detects that the BOOT.BIN
+    is a Windows CE Exectuable (0WINCEOS.BIN), It will not modify the
+    0WINCEOS.BIN. If it detects that this Executable is a normal 
+    Katana Executable, It will ask you for the the -msinfo number that 
+    CDRECORD gave you in the last step. It will then modify the 
+    BOOT.BIN according to the number that cdrecord -msinfo gave you. 
+    Next, It will ask you for the filename of the Bootsector. Here,
+    you should input IP.BIN. It will hack the IP.BIN for self-boot
+    purposes.
+
+     (Side Note: Only input the 2nd Number that MSINFO gave you,
+     Ex. If it gave you: 0,163012, Input 163012 when BINHACK prompts
+     you for the MSINFO number.)
+
+12) Once the changes are made with BINHACK.EXE to the BOOT.BIN file, Copy
+    the BOOT.BIN over to the "data" directory's root. Please make sure
+    that you did not rename the file to actually be called BOOT.BIN.
+    It should still be called the original filename that you found out
+    from Step 5. 
+
+
+13) Now, you should have in your "data" directory, All game data files,
+    including BOOT.BIN, But it should not have IP.BIN. If you want to
+    dummy this CD, You must make a dummy now. You must make a normal
+    file dummy. Name this dummy "000DUMMY.DAT" and place it into the
+    "data" directory. Please note the overhead limitations of 
+    Multi-Session & Self-Booting that were mentioned at the beginning 
+    of the tutorial, and size your dummy accordingly. Your next step 
+    is to run MKISOFS and make a ISO out of these files. Run the 
+    following command while you are in your "selfboot" root directory: 
+
+    mkisofs -C x,y -V ECHELON -l -o data.iso data
+
+    "x,y" should be the numbers outputted to you from cdrecord -msinfo 
+    earlier.
+
+14) Run "IPINS.EXE" from the "selfboot" directory, In a DOS Prompt.
+    It will prompt you for the Bootsector filename, Choose IP.BIN.
+    It will then prompt you for the ISO filename, Choose the file
+    "data.iso" which you just generated in the last step. It will
+    patch IP.BIN as the bootsector on data.iso.
+
+15) You should now have a fairly large sized data.iso file sitting in
+    your "selfboot" directory tree now. It is time to burn this file.
+    You should still have the disk you burned the audio session to
+    earlier inserted in your CD-Recorder. You can do this with
+    either CDRWIN or CDRECORD, Just as the Audio Session Burning.
+
+    1) CDRWIN Method
+       
+       a) Fire up CDRWIN.
+       b) Click the 2nd Icon from the Top Left: "File Backup and Tools".
+       c) For Backup Tool/Operation: Select "Record an ISO9660 Image File".
+       d) For Image Filename, Choose data.iso in your "selfboot" directory.
+       e) Under Recording Options, Select your CD-Recorder. Check the
+          following options accordingly:
+   
+          Disc Type: CDROM-XA
+          Track Mode: MODE2
+          SPEED: Whatever You Want
+          Finalize/Close Session: Yes
+          Write Postgap: Yes 
+          Open New Session: No
+          Test Mode: No
+          Verify Recorded Image: No
+
+       f) Click the start button and you are burning.
+
+    2) CDRECORD Method
+  
+      a) In the "selfboot" directory you should have the cdrecord toolset
+         unzipped. You should see files such as cdrecord.exe, mkisofs.exe,
+         and cygwin1.dll.
+      b) Run the following command from a DOS Prompt:
+         cdrecord -scanbus
+      c) This should show you a list of CD-ROM and CD-Recorder units installed
+         in your system. Look for your CD-Recorder and find the SCSI Bus ID#.
+         It will be in format x,x,x.
+      d) In your "selfboot" directory, run the following command to record
+         the 2nd session of the disk:
+         
+         cdrecord -dev=x,x,x -xa1 data.iso
+         
+         You can optionally include "speed=x" after -audio, Where x is the
+         maximum speed that your CD-Recorder can record at.
+
+16) You are done! Eject the disk and try it in your Dreamcast.
+
+Tutorial for games with CDDA:
+-----------------------------
+
+1) Make a directory on your hard-disk called "selfboot"
+
+2) UnZIP this whole file (E-SELFBT.ZIP) to the directory.
+
+3) Download Win32 Binaries for CDRECORD & MKISOFS from:
+
+   ftp.fokus.gmd.de/pub/unix/cdrecord/alpha/win32/cdrtools-1.9a03-win32-bin.zip
+
+4) Unzip the file (cdrtools-1.9a03-win32-bin.zip) to the directory you made
+   on your hard disk earlier called "selfboot".
+
+5) Insert the Utopia Boot-CD version of the game into your CD-ROM drive,
+   Copy over the IP.BIN and 1ST_READ.BIN from the CD over to the "selfboot"
+   directory on your hard disk.
+
+   (Note 1: IP.BIN cannot be found on Accession releases, therefore Accession
+    releases cannot be made self-boot from this method.)
+
+   (Note 2: 1ST_READ.BIN might not be the exact name of the boot filename, If
+    you want to check what the boot filename really is on some games, open up
+    IP.BIN in a hex or text editor. Look on the top, It should say something
+    similar to: "V.001XXXXXXXX BLAH.BIN". If it says this, That means that
+    BLAH.BIN is the boot-filename, and this is the file that you should copy
+    over. If the game is using WinCE this filename will be 0WINCEOS.BIN.
+    This file will be referred to as BOOT.BIN from here-on.
+
+6) OK, So now in your "selfboot" directory, you should have this tutorial
+   unzipped, cdrecord and all related cdrecord tools, and you should also
+   have copied over the IP.BIN and BOOT.BIN from the game that you
+   are working on.
+
+7) Make a subdirectory called "data" inside your "selfboot" directory
+   and copy ALL game data files from the Utopia-BootCD game into this
+   directory. Also, delete the file IP.BIN from the "data" directory if
+   you already have it in the root of your "selfboot" tree. Also delete
+   the BOOTFILENAME.BIN (generally 1ST_READ.BIN) from your data tree if
+   you have already put this file in the root of your "selfboot" tree.
+
+   (Note: All files that you copy from a CD will have Read-Only attributes,
+    You must take these off before continuing.)
+
+8) Make a subdirectory called "cdda" inside your "selfboot" directory
+   tree. Fire up CDRWIN and click the Middle Icon on the top row 
+   called "Extract Disc/Tracks/Sectors". Choose your CD Reader in which
+   the original Utopia Boot-CD Game is inserted. Choose the Select Tracks
+   option at the top. As you will see in the Track Selection box at
+   the left, Audio tracks are represented by Red Circles. Click on Tracks
+   2 - X, where X is the last CDDA track. As you click on them they should
+   be outlined in black. For image filename input: "C:\selfboot\cdda\track",
+   Where C:\selfboot\cdda is the "cdda" directory inside your "selfboot"
+   tree.
+
+9) The above step should have read in CDDA tracks 2 -> End and placed them
+   as WAV files named trackxx.wav inside your "cdda" directory. They should
+   start with track02.wav and go up to trackxx.wav where xx is the last 
+   CDDA track on the CD. 
+
+10) Open up a DOS Prompt and switch to your "cdda" directory. Type in the
+    following command:
+
+    copy track03.wav track01.wav
+
+    After doing this, You should have generated Tracks 1 - 3, You should
+    now have 3 4-second dummy tracks as Tracks 1 - 3, and have real CDDA
+    from 4 -> End.
+
+11) Now, you have 2 ways of achieving the same thing for this step, I will
+    go over both ways and you can choose whichever you want. To start off
+    for both methods, insert a blank disk into your CD-Recorder.
+
+    1) CDRWIN Method:
+      
+       a) Fire up CDRWIN.
+          Goto the first icon on the top left: "Record Disc"
+       b) Click the icon in the top right corner: "Load tracks"
+       c) Click add, then choose ALL trackxx.wav files in your "cdda"
+          directory. Arrange them in order so they go from track01.wav
+          to the end. Click OK to add them to your disc layout.
+       d) Click the tab "Open New Session" near the bottom.
+       e) Burn this CD.
+
+   2) CDRECORD Method:
+ 
+      a) If your CD-Recorder cannot use the "Open New Session" option
+         in CDRWIN, You have one more way to do it, that may or may not
+         work.
+      b) In the "selfboot" directory you should have the cdrecord toolset
+         unzipped. You should see files such as cdrecord.exe, mkisofs.exe,
+         and cygwin1.dll.
+      c) Run the following command from a DOS Prompt:
+         cdrecord -scanbus
+      d) This should show you a list of CD-ROM and CD-Recorder units installed
+         in your system. Look for your CD-Recorder and find the SCSI Bus ID#.
+         It will be in format x,x,x. It will also be referred to as x,x,x for
+         the rest of this tutorial.
+      e) In your "selfboot" directory, run the following command to record
+         the 1st session of the disk:
+         
+         cdrecord -dev=x,x,x -multi -audio \cdda\track01.wav \cdda\track02.wav etc.
+
+         Continue going with your track list until you have input all tracks
+         in order. If this whole command does not fit into your DOS Prompt,
+         make a batch file with this long command and run the batch file.
+         
+         You can optionally include "speed=x" after -audio, Where x is the
+         maximum speed that your CD-Recorder can record at.
+
+12) OK, Now that you have the first session (CDDA) burned, it's time to move onto
+   the second. This is the crucial part so make sure you pay attention and
+   follow things closely. You should already have all game data files in the
+   subdirectory "data", besides the BOOT.BIN and IP.BIN.
+
+13) Read over the CDRECORD burn instructions. Find out the SCSI Bus ID# of
+    your CD-Recorder If you have not done so already. Run the following 
+    command:
+   
+    cdrecord -dev=x,x,x -msinfo
+
+    It will spit out a number in the form x,y. Values differ enormously
+    for games that have different amounts of CDDA burned to the first
+    session. Make sure you get the correct value.
+
+14) Run a DOS Prompt and goto your "selfboot" directory, You should have
+    an executable there called "BINHACK.EXE". In addition you should have
+    the BOOT.BIN (generally called 1ST_READ.BIN) and IP.BIN in this 
+    directory.
+
+    Run the program BINHACK.EXE. When it prompts you for the Binary
+    file to modify, Pick the BOOT.BIN. If it detects that the BOOT.BIN
+    is a Windows CE Exectuable (0WINCEOS.BIN), It will not modify the
+    0WINCEOS.BIN. If it detects that this Executable is a normal 
+    Katana Executable, It will ask you for the the -msinfo number that 
+    CDRECORD gave you in the last step. It will then modify the 
+    BOOT.BIN according to the number that cdrecord -msinfo gave you. 
+    Next, It will ask you for the filename of the Bootsector. Here,
+    you should input IP.BIN. It will hack the IP.BIN for self-boot
+    purposes.
+
+     (Side Note: Only input the 2nd Number that MSINFO gave you,
+     Ex. If it gave you: 0,163012, Input 163012 when BINHACK prompts
+     you for the MSINFO number.)
+
+15) Once the changes are made with BINHACK.EXE to the BOOT.BIN file, Copy
+    the BOOT.BIN over to the "data" directory's root. Please make sure
+    that you did not rename the file to actually be called BOOT.BIN.
+    It should still be called the original filename that you found out
+    from Step 5. 
+
+16) Now, you should have in your "data" directory, All game data files,
+    including BOOT.BIN, But it should not have IP.BIN. If you want to
+    dummy this CD, You must make a dummy now. You must make a normal
+    file dummy. Name this dummy "000DUMMY.DAT" and place it into the
+    "data" directory. Please note the overhead limitations of 
+    Multi-Session & Self-Booting that were mentioned at the beginning 
+    of the tutorial, and size your dummy accordingly. Your next step 
+    is to run MKISOFS and make a ISO out of these files. Run the 
+    following command while you are in your "selfboot" root directory: 
+
+    mkisofs -C x,y -V ECHELON -l -o data.iso data
+
+    "x,y" should be the numbers outputted to you from cdrecord -msinfo 
+    earlier.
+
+17) Run "IPINS.EXE" from the "selfboot" directory, In a DOS Prompt.
+    It will prompt you for the Bootsector filename, Choose IP.BIN.
+    It will then prompt you for the ISO filename, Choose the file
+    "data.iso" which you just generated in the last step. It will
+    patch IP.BIN as the bootsector on data.iso.
+
+18) You should now have a fairly large sized data.iso file sitting in
+    your "selfboot" directory tree now. It is time to burn this file.
+    You should still have the disk you burned the audio session to
+    earlier inserted in your CD-Recorder. You can do this with
+    either CDRWIN or CDRECORD, Just as the Audio Session Burning.
+
+    1) CDRWIN Method
+       
+       a) Fire up CDRWIN.
+       b) Click the 2nd Icon from the Top Left: "File Backup and Tools".
+       c) For Backup Tool/Operation: Select "Record an ISO9660 Image File".
+       d) For Image Filename, Choose data.iso in your "selfboot" directory.
+       e) Under Recording Options, Select your CD-Recorder. Check the
+          following options accordingly:
+   
+          Disc Type: CDROM-XA
+          Track Mode: MODE2
+          SPEED: Whatever You Want
+          Finalize/Close Session: Yes
+          Write Postgap: Yes 
+          Open New Session: No
+          Test Mode: No
+          Verify Recorded Image: No
+
+       f) Click the start button and you are burning.
+
+    2) CDRECORD Method
+  
+      a) In the "selfboot" directory you should have the cdrecord toolset
+         unzipped. You should see files such as cdrecord.exe, mkisofs.exe,
+         and cygwin1.dll.
+      b) Run the following command from a DOS Prompt:
+         cdrecord -scanbus
+      c) This should show you a list of CD-ROM and CD-Recorder units installed
+         in your system. Look for your CD-Recorder and find the SCSI Bus ID#.
+         It will be in format x,x,x.
+      d) In your "selfboot" directory, run the following command to record
+         the 2nd session of the disk:
+         
+         cdrecord -dev=x,x,x -xa1 data.iso
+         
+         You can optionally include "speed=x" after -audio, Where x is the
+         maximum speed that your CD-Recorder can record at.
+
+19) You are done! Eject the disk and try it in your Dreamcast. 
+
+-----------------------------------------------------
+All Content & Code Written by Echelon Dreamcast 2000.

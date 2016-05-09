@@ -1,0 +1,51 @@
+-----------------
+What's New in 3.5
+-----------------
+
+Add an option (noip&binhack) 
+to disable ip.bin & boot.bin hack for selfboot DreamSnes
+
+
+-------
+Config
+-------
+Note: Use notepad edit [line 10-14] in selfboot.bat
+::you need to alter these values before run the Batch file
+
+set SCSI_ID=0,1,0   <== CDRecorder SCSIBUS-ID
+set WAV_SPEED=4     <== 1st session Write Speed
+set ISO_SPEED=4     <== 2st session Write Speed
+set CDRWIN_DIR=C:\CDRWIN3\Cdrwin.exe   <== CDRWIN location Path
+set InstallPath=c:  <== Default is c:
+set MODE=xa1        <== Default is xa1
+::-------------------------------------------------------
+
+
+SCSI_ID 
+it's the LUN for your writer in the form x,y,z
+This should show you a list of CD-ROM and CD-Recorder units installed
+in your system. Look for your CD-Recorder and find the SCSI Bus ID#.
+It will be in format x,y,z
+You can simply get CD-Recorder SCSI_ID by clicking the ScanBus.bat
+
+* SCSI_ID must be setup before using the selfboot.bat, otherwise it'll not work *
+
+
+WAV_SPEED
+ISO_SPEED
+
+it's the write speed
+4 = write at 4x 
+8 = write at 8x
+
+
+CDRWIN_DIR
+it's the Cdrwin.exe location
+
+ie: C:\CDRWIN3\Cdrwin.exe
+    C:\Program Files\CDRWIN\Cdrwin.exe
+
+
+
+-----------------------------------------
+More information at http://go.to/selfboot

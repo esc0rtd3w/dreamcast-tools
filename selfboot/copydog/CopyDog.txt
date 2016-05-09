@@ -1,0 +1,57 @@
+                CopyDog.bat HAS BEEN TESTED UNDER WIN 98/2000 
+       
+contact: c_opydog@hotmail.com 
+       
+UNZIP: the latest version of cdrecord from: 
+       ftp://ftp.fokus.gmd.de/pub/unix/cdrecord/alpha/win32/ 
+       into a directory named selfboot 
+	 
+Run DOS session 
+Syntax: COPYDOG  [options]    eg copydog -t cdda -e1 voice.afs -d 400 
+ Options: 
+ -h help                      prints this usage message 
+ -b (name for BOOT.BIN)       default= 1ST_READ.BIN 
+                              if 0 is entered 0WINCEOS.BIN is used 
+ -1 cdrecord/cdrwin/false     which method to use to burn 1st session on CD 
+ -2 cdrecord/cdrwin/false     which method to use to burn 2nd session on CD 
+                              false= program will bypass burning -1(audio),-2(game info) session 
+                              DEFAULT= program will let you choose later                             
+ -k true/false                let you bypass binhack + instead hack maually 
+                              DEFAULT= true ie binhack will occur 
+ -p true/false                let you bypass patching bootsector 
+                              DEFAULT= true ie patching will occur                
+ -g (game_name)               name for your game 
+ -d (size)/false              size of dummy file in Mbytes 
+                              (user will be given option to burn dummy file as audio or data)
+                              -d false    will bypass this stage 
+ -c true/false                will bypass copying of DC game data  
+                              DEFAULT = true ie copying will occur 
+ -r true/false                set = true to bypass all stages except burning iso 
+                              DEFAULT = false (user must also specify -o (isoname).iso 
+ -i true/false                set = false to bypass create ISO image stage 
+                              DEFAULT = true 
+ -m xa1/xa2                   burnmode, DEFAULT = xa1 
+ -s (speed)                   set to burn speed 
+                              DEFAULT = 2 
+ -o (isoname).iso             name for your image file 
+                              DEFAULT will use existing DC game label 
+ -t cdda/noncdda              type of game to be made selfboot 
+                              DEFAULT will decide automatically 
+ -a true/false                true = only audio will be burned to CD 
+                              DEFAULT = false 
+ -e1 -e2 -e3                  exclude these files from original game being copied to selfboot game 
+ 
+ 
+ note: 1. files will be "sorted" according to file sorttxt.txt, which you should 
+          put into your selfboot directory 
+       2. burning dummyfile as audio will burn the first session as a large audio dummy file 
+       3. you should edit copydog.bat in a text editor + save as type "text document"  
+       
+        ******** edit the following 5 values in copydog.bat ******** 
+ 
+SET READ_DRV= set this to the drive for your cdrom reader eg D: 
+SET HOMEPATH= set this to the drive + directory that directory selfboot exists eg C: 
+SET SCSIwrit= run cdrecord -scanbus to find cdrom or scsi device (as Bus,Id,Lun) for cd writer eg 1,0,0 
+SET SCSIread= run cdrecord -scanbus to find cdrom or scsi device (as Bus,Id,Lun) for cd reader eg 0,1,0 
+SET CDRWIN=   set this to where you have installed cdrwin eg C:\CDRWIN3\CDRWIN.EXE 
+ 

@@ -1,0 +1,23 @@
+================================================
+Bin 2 Boot GUI                        19.08.2001
+================================================
+
+Just a simple graphical user interface for the
+DOS program BIN2BOOT.EXE by Xeal:
+http://xeal.cjb.net
+
+BIN2BOOT now should work on Win2K with this GUI.
+Have fun with this release, thanks to Xeal.
+
+Also special thanks to Ramin for his request.
+It was HES idea to make this GUI.
+Email him: raminramin@hotmail.com
+
+------------------------------------------------
+
+GUI Copyright (C) Elissaios K. - Greece 2001/02
+Contact: elissaios@hotmail.com
+Website: www.elissaios.f2s.com
+ICQ Num: #83562704
+
+================================================

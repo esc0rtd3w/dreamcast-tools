@@ -1,0 +1,17 @@
+:Base CDRWIN.HLP
+:Title CDROM Recording Tools
+:Index CDROM Recording Tools=CDRWIN.HLP
+1 Golden Hawk Technology CDROM Recording Tools
+2 Record Disc=IDH_RECORDDISC
+2 Backup Disc=IDH_COPYDISC
+2 Extract Disc/Tracks/Sectors=IDH_EXTRACTDISC
+2 File Backup and Tools=IDH_TOOLS
+2 CD-TEXT Editor=IDH_CDTEXT
+2 Table of Contents=IDH_TOC
+2 Devices and Settings=IDH_SETTINGS
+2 Unlock Program=IDH_UNLOCK
+2 Advanced Topics=Advanced_Topics
+2 Supported Devices=Supported_Devices
+2 Windows 95 Tips=Windows_95_Tips
+2 Frequently Asked Questions=Frequently_Asked_Questions
+2 Contact Information=Contact_Informaton

@@ -1,0 +1,9 @@
+data/0.0 9
+data/0gdtex.pvr 8
+data/1st_read.bin 7
+data/moive/00snd.afs 6
+data/Scr.afs 5
+data/Mot.afs 4
+data/Tex.afs 3
+data/Pol.afs 2
+data/Snd.afs 1

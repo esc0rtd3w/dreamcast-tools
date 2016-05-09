@@ -1,0 +1,2 @@
+0winceos.bin
+IP.BIN

@@ -1,0 +1,1 @@
+cdrecord -scanbus
