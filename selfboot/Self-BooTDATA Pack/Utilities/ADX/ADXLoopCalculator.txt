@@ -1,0 +1,65 @@
+ADX Loop Calcuator
+
+I've finally gotten around to writing some documentation for this. I've also
+included what is in my opinion the best ADX decoder (along with encoder) with
+the archive. This guide is not intended for complete idiots, you must be
+reasonably competent with using the command prompt and so on
+
+Basically, ADX files support looping, that is that music can play continuously
+by looping back to the an earlier point in the track when it's done (often just
+back to the start, but often to another point for seamless continuation).
+
+Of course when you decode and downsample the ADX, this information is lost
+and needs to be put back in when you encode or your tracks will simply stop
+when they are finished.
+
+This tool helps you do that. Because the loop time is in samples, and not
+seconds, when you change the sample rate the loop position must be calculated
+again.
+
+What you'll need:
+
+ADX decoder (included ADX_Convert.exe)
+WAV downsampler (I recommend the free SoX from sox.sourceforge.net)  ---> [FamilyGuy note: SOX included in this pack]
+ADX encoder (included adxencd.exe)
+
+First thing you need to do is copy or extract (from AFS) all your ADX files
+to a new folder. For examples sake, we will use C:\ADX
+
+Then you will need to decode them all to a new, temporary folder. Say C:\WAV
+
+I've included ADX_Convert.exe which I consider to be the best decoder, because
+it preserves the right volume level at all sample rates (tools like adx2wav
+created big problems at non 44KHz sample rates). Make sure you set the fadeout
+to 0 because it defaults to 5.
+
+Now you will need to downsample the WAV files. Let's assume they are 44100 Hz
+and you wish to downsample to 22050 Hz. Here is a way to do it with sox using
+the above examples. SoX executable must be somewhere in your path. Now go to
+C:\WAV in command prompt and execute:
+
+FOR %1 in (*.WAV) DO sox %1 -r 22050 C:\ADX\%1 polyphase  ---> [FamilyGuy note: use wav-2-22kHz.bat for this!]
+
+This will process each WAV in the folder and place a downsampled version in
+C:\ADX using high quality polyphase filtering.
+
+Additionally to convert from stereo to mono, you would add -c 1 to the command
+line after the first %1. Personally I prefer 22050 stereo to 44100 mono, but
+it's up to you.
+
+Now relax, because it could take a while. You can of course use any other
+Audio program to do this task, just make sure your downsampled files end up
+in the same folder as your original ADX files.
+
+When that is done, load up ADX Loop Calculator. In the main field, put your
+folder which contains both downsampled WAV files and original ADX files. In
+our example, this is C:\ADX. Now click Calculate.
+
+If everything worked, you should have a new file called encode.bat created
+in C:\ADX. If you didn't delete the ADX files automatically, you can now do
+so or move them elsewhere, because they will be overwritten when you encode.
+
+Run encode.bat and it should encode all your WAV files into new dowsampled
+and relooped ADX files. That's all there is to it.
+
+darkfalz.public@gmail.com

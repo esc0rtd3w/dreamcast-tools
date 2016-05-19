@@ -1,0 +1,6 @@
+IP.BINHACK_v3 : Old and dirty binhack automation script, with 32bit bincon and binhack.
+
+This is not good coding, but it works so who cares. It's the first script I ever wrote from the ground up.
+Auto.binhack and ip.binhack are the same script, but concatenated into exes and using 16bit versions of bincon and binhack.
+
+Documentation: Read the code to figure it out.
