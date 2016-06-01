@@ -1,0 +1,39 @@
+There is a large difference between the way that the Dreamcast handles GD-ROM and Mil-CD media.
+There is a completely different boot sequence for each, such that copying direct data from one medium to another will not boot correctly.
+When the Dreamcast boots, it determines whether the media inside is a GD-ROM or Mil-CD. How it does this is unknown.
+This may be because of the "security ring" that some people attribute this to, because GD-Rs require a System Disc 2 to boot on a retail Dreamcast and they DON'T have a security ring.
+
+If it determines that the media is GD-ROM, it takes this boot sequence,
+1) Dreamcast is powered on.
+2) Dreamcast loads the IP.BIN into memory.
+3) Dreamcast checks the IP.BIN for the binary filename (usually 1ST_READ.BIN)
+4) Dreamcast loads the binary directly into RAM.
+5) Dreamcast executes the IP.BIN code, including copyright screen code and initialization.
+6) Dreamcast passes control over to the binary and our game begins.
+
+If it determines the media is a Mil-CD, it takes this boot sequence.
+1) Dreamcast is powered on.
+2) Dreamcast loads the IP.BIN into memory.
+3) Dreamcast checks the IP.BIN for the scrambled binary filename (usually 1ST_READ.BIN)
+4) Dreamcast loads the binary into RAM, unscrambling it as goes (meaning that the binary must've been scrambled already to be now loaded as proper data).
+5) Dreamcast disables the GD-ROM drive.
+6) Dreamcast executes IP.BIN code, including copyright screen code and initialization.
+7) Dreamcast passes control over to the binary.
+8) Binary resets the GD-ROM drive with 'reset trick,' so we can use the GD-ROM drive.
+
+Now, we know for warez releases that nobody bothers to scramble the binaries, yet the Dreamcast still loads them in the Mil-CD fashion. This is due
+to a trick that Echelon uses. Bin2boot too does this (unless you use /nohack). This is how a typical warez game is loaded:
+1) Dreamcast is powered on.
+2) Dreamcast loads the IP.BIN into memory.
+3) Dreamcast checks the IP.BIN for the scrambled binary filename (usually 1ST_READ.BIN)
+4) Dreamcast loads the binary into RAM, unscrambling it as it goes (BUT the game is not scrambled, meaning that the Dreamcast unscrambles not-scrambled code, creating bad data).
+5) Dreamcast disables the GD-ROM drive.
+6) Dreamcast executes IP.BIN code, including copyright screen code and initialization. Here's the trick: Echelon's BINHACK.EXE does more to the IP.BIN than change the company name to "ECHELON." It actually adds code (starting at IP.BIN offset 0x629c). It scrambles the binary that was loaded into memory. Now proper data is in memory. Next, the special code does the 'reset trick' and unlocks the GD-ROM drive.
+7) Dreamcast passes control over to the binary.
+
+This trick works fine, because the prescrambledbin+descramblingcode of homebrew stuff is equivilent to the descramblingcode+scramblingcode we see in warez releases.
+According to Rand Linden, on a non-Mil-CD Dreamcast the Dreamcast's ROM is missing the code for a Mil-CD boot sequence. Thus, our challenge is now to create a CD-R that makes the Dreamcast start the GD-ROM boot sequence, if we want to load stuff from a CD-R onto a non-Mil-CD Dreamcast. 
+This concludes that a triple track game or a game with a 45000 LBA is _not_ enough to beat the non-Mil-CD Dreamcast (for warez it will save us from having to binhack the 1ST_READ.BIN, but we still must use the Echelon IP.BIN for the GD-ROM 'reset trick').
+We know warez version of Net de Tennis (which uses triple tracks and 45000 LBA) still uses the Mil-CD bootup sequence, as it has has a scrambling/GD-resetting IP.BIN which would render it unbootable (as the binary in RAM would be scrambled) if it used a GD-ROM boot sequence.
+Thus, Net de Tennis will not boot on a non-Mil-CD Dreamcast.
+I am unaware of a warez release that properly works on a non-Mil-CD Dreamcast (fools a Dreamcast into a GD-ROM boot sequence).
